@@ -12,9 +12,3 @@ def greeting():
 def getTime():
 	time = datetime.now()
 	return time.strftime("%d/%m/%Y %H:%M:%S")
-
-def printAbilities():
-	string = """
-				 
-			 """
-

@@ -20,10 +20,12 @@ def printURLInfo(url):
 		    r = ydl.extract_info(url, download=False)  # don't download, much faster
 		# print some typical fields
 	print "%s was uploaded by '%s' and has %d views, %d likes, and %d dislikes" % (r['title'], r['uploader'], r['view_count'], r['like_count'], r['dislike_count'])
-
+	command  = raw_input("> Do you want me to download it?")
+	if command[0] is 'y' or command[0] is 'Y':
+		download(url)
 
 def saveTo(title, savedir):
-	return os.path.join(savedir, "%s--.mp3" % title)
+	return os.path.join(savedir, "%s.mp3" % title)
 
 def download(url):
 	foldername = "Mp3FromYoutube"
@@ -48,3 +50,6 @@ def download(url):
 	result = ydl.extract_info(url, download=True)
 	os.rename(result['id'], savepath)
 	print "Downloaded and converted %s successfully!" % savepath
+
+
+

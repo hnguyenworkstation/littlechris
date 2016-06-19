@@ -1,6 +1,7 @@
 import greeting
 import dlfromyoutube
-import os
+
+from sys import platform as _pl
 
 class Chris:
 	def __init__(self):
@@ -12,10 +13,15 @@ class Chris:
 		}
 
 		self.details = {
-			"greeting" : """
-							> \t--- I am a friendly person
-							> \t--- So, I will say hello to you 
-						 """
+			"greeting" : """\n\t--- I am a friendly person
+\t--- So, I will say hello to you 
+						 """,
+			"download" : """\n\t--- I now can download a .mp3 file from youtube.com
+\t--- Of course, I need to have a link from you!
+						 """,
+			"exit" : """\n\t--- If you want to me to go away :(
+\t--- Enter this command :(
+			"""
 		}
 
 		self.greet()
@@ -27,8 +33,11 @@ class Chris:
 			self.runCommand(command)
 
 	def printHelp(self):
+		print "\n## For now, what I could do are: "
+		# print out list of commands and its details
 		for key in self.details.keys():
-			print "> " + key
+			print key + self.details[key]
+		print "## I am learning and improving myself! Support and Follow me!"
 
 	def greet(self):
 		greeting.greeting()
@@ -43,7 +52,12 @@ class Chris:
 			self.functionals[command]()
 
 	def exit(self):
-		os.exit()
+		if _pl is "linux" or _pl is "linux2":
+			os.exit()
+		elif _pl is "darwin":
+			os.exit()
+		elif _pl is "win32":
+			return
 
 
 
