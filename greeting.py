@@ -6,10 +6,15 @@
 from datetime import datetime
 
 def greeting():
-	print "Now: " + getTime()
-	print "-- Hello!\n-- How are you doing today?!\n-- I hope you have a good day!"
+	print "> Now: " + getTime()
+	print "> -- Hello!\n> -- How are you doing today?!\n> -- I hope you have a good day!"
 
 def getTime():
 	time = datetime.now()
 	return time.strftime("%d/%m/%Y %H:%M:%S")
+
+def printAbilities():
+	string = """
+				 
+			 """
 
