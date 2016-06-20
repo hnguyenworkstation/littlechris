@@ -60,6 +60,7 @@ class Chris:
 		elif _pl is "win32":
 			return
 
-adapter = adapter.ServerAdapter()
+adapt = adapter.ServerAdapter()
+adapt.reCommand("testing", 'Y')
 chris = Chris()
 
