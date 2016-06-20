@@ -1,5 +1,6 @@
 import greeting
 import dlfromyoutube
+import adapter
 
 from sys import platform as _pl
 
@@ -59,8 +60,6 @@ class Chris:
 		elif _pl is "win32":
 			return
 
-
-
-
+adapter = adapter.ServerAdapter()
 chris = Chris()
 
