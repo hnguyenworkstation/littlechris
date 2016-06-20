@@ -25,12 +25,16 @@ class ServerAdapter:
 			print "Cannot connect to the server"
 			print "Something went wrong: {}".format(err)
 
-	def reCommand(self, commandName, excecuted):
+
+	def reCommand(self, commandname, executed):
 		now = datetime.now()
+		# create query to insert data to commands
 		query = "INSERT INTO commands "
-                "(id, command, applied_date, excecuted) "
+                "(id, command, applied_date, executed)"
                 "VALUES (%s, %s, %s, %s)"
-        values = ('NULL', commandName, now, excecuted)
+
+        # create values to apply to the query
+        values = ("NULL", commandname, now, executed )
 
         try:
         	self.cursor.execute(query, values)

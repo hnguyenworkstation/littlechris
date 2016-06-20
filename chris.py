@@ -26,11 +26,11 @@ class Chris:
 		}
 
 		self.greet()
-		print '> Let me know if you need anything!'
+		print 'Let me know if you need anything!\n'
 
 		command = None
 		while command is not '> exit':
-			command = raw_input('> ')
+			command = raw_input('>> ')
 			self.runCommand(command)
 
 	def printHelp(self):
@@ -44,8 +44,8 @@ class Chris:
 		greeting.greeting()
 
 	def download(self):
-		print "> Give me a link and you will be allset?"
-		url = raw_input("> ")
+		print "Give me a link and you will be allset?"
+		url = raw_input(">> ")
 		dlfromyoutube.printURLInfo(url)
 
 	def runCommand(self, command):
@@ -61,6 +61,6 @@ class Chris:
 			return
 
 adapt = adapter.ServerAdapter()
-adapt.reCommand("testing", 'Y')
+adapt.reCommand("testing", "Y")
 chris = Chris()
 
