@@ -1,19 +1,33 @@
 import greeting
 import dlfromyoutube
 import adapter
+import sudoku
 
 from sys import platform as _pl
 
+# Making Objects
+adapt = adapter.ServerAdapter()
+sudoku = sudoku.Sudoku()
+
 class Chris:
 	def __init__(self):
-		self.functionals = {
+		self.options = {
 			"help" : self.printHelp,
+			"do" : self.printDoOptions,
+		}
+
+		self.methodList = {
+			"help" : [],
+			"do" : ["greeting", "download", "exit"]
+		}
+
+		self.doFunctionals = {
 			"greeting" : self.greet,
 			"download" : self.download,
 			"exit" : self.exit
 		}
 
-		self.details = {
+		self.doDetails = {
 			"greeting" : """\n\t--- I am a friendly person
 \t--- So, I will say hello to you 
 						 """,
@@ -31,13 +45,33 @@ class Chris:
 		command = None
 		while command is not '> exit':
 			command = raw_input('>> ')
-			self.runCommand(command)
+			commandList = command.split(' ')
+			if commandList[0] != "chris":
+				print "Enter command with the following format: chris [options] [methods]"
+			elif len(commandList) == 2:
+				self.printOptions(commandList[1])
+			else:
+				self.runCommand(command[1], commandList[2])
 
 	def printHelp(self):
 		print "\n## For now, what I could do are: "
 		# print out list of commands and its details
-		for key in self.details.keys():
-			print key + self.details[key]
+		for key in self.doDetails.keys():
+			print key + self.doDetails[key]
+		print "## I am learning and improving myself! Support and Follow me!"
+
+	# print the options
+	def printOptions(self, option):
+		if option in self.options.keys():
+			self.options[option]()
+		else:
+			print "Sorry! I am not able to do that, YET!"
+
+	def printDoOptions(self):
+		print "\n## Which that option, what I could do are: "
+		# print out list of commands and its details
+		for key in self.doDetails.keys():
+			print key + self.doDetails[key]
 		print "## I am learning and improving myself! Support and Follow me!"
 
 	def greet(self):
@@ -48,9 +82,18 @@ class Chris:
 		url = raw_input(">> ")
 		dlfromyoutube.printURLInfo(url)
 
-	def runCommand(self, command):
-		if command in self.functionals:
-			self.functionals[command]()
+	def runCommand(self, option, command):
+		if option in self.methodList.keys():
+			if command in self.methodList[option]:
+				self.doFunctionals[command]()
+				# Record command entered to little chris
+				adapt.reCommand(command, 'T')
+			else:
+				print "That method doesn't belong to this option!\n\t--- Try \"chris help\" to learn more about me"
+				adapt.reCommand(command, 'F')
+		else:
+			print "I am not able to do that, for now!\n\t--- Try \"chris help\" to learn more about me"
+			adapt.reCommand(command, 'F')
 
 	def exit(self):
 		if _pl is "linux" or _pl is "linux2":
@@ -60,7 +103,5 @@ class Chris:
 		elif _pl is "win32":
 			return
 
-adapt = adapter.ServerAdapter()
-adapt.reCommand("testing", "Y")
 chris = Chris()
 

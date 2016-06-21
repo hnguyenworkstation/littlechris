@@ -29,18 +29,12 @@ class ServerAdapter:
 	def reCommand(self, commandname, executed):
 		now = datetime.now()
 		# create query to insert data to commands
-		query = "INSERT INTO commands "
-                "(id, command, applied_date, executed)"
-                "VALUES (%s, %s, %s, %s)"
-
-        # create values to apply to the query
-        values = ("NULL", commandname, now, executed )
-
-        try:
-        	self.cursor.execute(query, values)
-        	self.conn.commit()
-        	print "Successfully Recorded"
-        except mysql.connector.Error as err:
+		query = "INSERT INTO commands (command, applied_date, executed) VALUES (%s, %s, %s)"
+		values = (commandname, now, executed )
+		try:
+			self.cursor.execute(query, values)
+			self.conn.commit()
+		except mysql.connector.Error as err:
 			print "Something went wrong: {}".format(err)
 
 
